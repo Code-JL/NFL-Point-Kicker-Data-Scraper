@@ -39,7 +39,7 @@ This project simplifies the process of analyzing NFL kicking data by automating 
    - `TotalDataFormatting.py`
    - `SplitDataFormatting.py` (optional)
    
-2. Specify the desired time period when prompted.
+2. Specify the desired time period within the code.
 3. Retrieve the generated CSV files from the output directory.
 
 ## Future Improvements
