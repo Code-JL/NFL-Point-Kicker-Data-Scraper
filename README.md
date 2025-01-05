@@ -1,52 +1,97 @@
-
 # NFL Point Kicker Data Scraper
 
-A Python-based tool that retrieves NFL game data within a specified time period and extracts detailed point-kicking statistics. The data is formatted into clean, ready-to-use CSV files, ideal for analysis and visualization.
+A Python-based web scraping toolkit that extracts and processes NFL kicking statistics from Pro-Football-Reference. This project automates the collection of comprehensive game data, with a particular focus on field goal attempts and environmental conditions.
 
-## Purpose
+## Overview
 
-This project simplifies the process of analyzing NFL kicking data by automating data extraction and formatting. The generated datasets are perfect for creating graphs, identifying trends, or conducting in-depth statistical analysis. It utilizes data sourced from [Pro-Football-Reference](https://www.pro-football-reference.com/), ensuring accurate and comprehensive information.
+The NFL Point Kicker Data Scraper systematically collects and processes data through a pipeline of specialized Python scripts, each handling a specific aspect of the data collection and formatting process. The result is a series of well-structured CSV files ready for analysis.
 
-## Features
+## Key Features
 
-- **Customizable Time Frame**: Fetch games from any specified time period by year.
-- **Detailed Kick Data**: Extract key data points for each kick, such as distance, success rate, and wind conditions.
-- **CSV Export**: Automatically formats the data into CSV files for seamless integration with data analysis tools.
+- **Comprehensive Data Collection**
+  - Stadium information
+  - Roof type and playing surface
+  - Weather conditions (temperature, humidity, wind speed)
+  - Field goal attempts and success rates
 
-## Use Cases
+- **Intelligent Data Processing**
+  - Automatic rate limiting to prevent IP bans
+  - Incremental data saving
+  - Error handling and recovery
+  - Multiple output formats for different analysis needs
 
-- **Sports Analytics**: Analyze trends in field goal success rates or identify patterns across different teams and players.
-- **Data Visualization**: Create compelling graphs and visualizations for presentations or personal projects.
-- **Machine Learning**: Use the formatted datasets as input for predictive modeling or other AI applications.
+- **Specialized Output Files**
+  - Complete dataset (NFLKicksInfo2000-2022.csv)
+  - Weather-specific analysis (NFLKicksInfo2000-2022WeatherSplit.csv)
+  - Dome-specific analysis (NFLKicksInfo2000-2022NonSplitClosedDome.csv)
+  - Wind chill analysis (NFLKicksInfo2000-2022WeatherSplitWindChill.csv)
 
-## Getting Started
+## Technical Architecture
 
-### Prerequisites
-- Python 3.x
+The system operates through a series of specialized scripts:
 
-### Installation
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/Code-JL/NFL-Point-Kicker-Data-Scraper.git
-   ```
+1. `FootballInfoScraper.py` - Initializes the scraping pipeline and collects game URLs
+2. `FootballGameInfoScraper.py` - Extracts detailed game data
+3. `GameUrlDateSeparator.py` - Processes game dates
+4. `DateToCSVFormat.py` - Standardizes date formats
+5. `TotalDataFormatting.py` - Creates the master dataset
+6. `SplitDataFormatting.py` - Generates specialized analysis files
 
-### Usage
-1. Execute the following files in order:
-   - `FootballInfoScraper.py`
-   - `FootballGameInfoScraper.py` (This may take a significant amount of time; proceed to the next steps while it runs.)
-   - `GameUrlDateSeparator.py`
-   - `DateToCSVFormat.py`
-   - `TotalDataFormatting.py`
-   - `SplitDataFormatting.py` (optional)
-   
-2. Specify the desired time period within the code.
-3. Retrieve the generated CSV files from the output directory.
+## Installation
 
-## Future Improvements
+```bash
+# Clone the repository
+git clone https://github.com/Code-JL/NFL-Point-Kicker-Data-Scraper.git
 
-- Combine all scripts into a single execution flow for streamlined usability.
-- Add support for real-time data updates.
+# Navigate to project directory
+cd NFL-Point-Kicker-Data-Scraper
+
+# Install required packages
+pip install -r requirements.txt
+```
+
+## Usage
+
+Execute the scripts in the following order:
+
+```bash
+python FootballInfoScraper.py
+python FootballGameInfoScraper.py
+python GameUrlDateSeparator.py
+python DateToCSVFormat.py
+python TotalDataFormatting.py
+python SplitDataFormatting.py
+```
+
+Note: `FootballGameInfoScraper.py` may take significant time to complete due to rate limiting.
+
+## Output Files
+
+The scraper generates several CSV files optimized for different analysis scenarios:
+
+- `NFLKicksInfo2000-2022.csv` - Complete dataset
+- `NFLKicksInfo2000-2022WeatherSplit.csv` - Weather-specific analysis
+- `NFLKicksInfo2000-2022NonSplit.csv` - General analysis
+- `NFLKicksInfo2000-2022NonSplitClosedDome.csv` - Indoor game analysis
+- `NFLKicksInfo2000-2022WeatherSplitWindChill.csv` - Wind chill impact analysis
+
+## Data Fields
+
+Each record includes:
+- Game date and location
+- Stadium characteristics
+- Environmental conditions
+- Kicking performance metrics
+
+## Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
 
 ## License
 
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## Acknowledgments
+
+- Data sourced from [Pro-Football-Reference](https://www.pro-football-reference.com/)
+- Built with Python and BeautifulSoup4
